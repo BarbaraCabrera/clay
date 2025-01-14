@@ -3,6 +3,7 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
+import ClayBadge from '@clayui/badge';
 import {ClayCheckbox, ClayRadio} from '@clayui/form';
 import {
 	FOCUSABLE_ELEMENTS,
@@ -38,6 +39,7 @@ type TType =
 interface IItem {
 	active?: boolean;
 	checked?: boolean;
+	deprecated?: boolean;
 	disabled?: boolean;
 	href?: string;
 	items?: Array<IItem>;
@@ -252,6 +254,7 @@ const ClayDropDownContext = React.createContext({
 } as Context);
 
 const Item = ({
+	deprecated,
 	label,
 	onClick,
 	...props
@@ -275,6 +278,15 @@ const Item = ({
 			{...props}
 		>
 			{label}
+
+			{deprecated && (
+				<ClayBadge
+					className="c-ml-2 text-uppercase"
+					displayType="warning"
+					label="deprecated"
+					translucent
+				/>
+			)}
 		</ClayDropDown.Item>
 	);
 };
